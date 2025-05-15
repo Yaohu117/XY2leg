@@ -61,7 +61,7 @@ class G1Robot(LeggedRobot):
         self.phase_left = self.phase
         self.phase_right = (self.phase + offset) % 1
         self.leg_phase = torch.cat([self.phase_left.unsqueeze(1), self.phase_right.unsqueeze(1)], dim=-1) # shape（batch_size, 2）第一列是左腿相位，第二列是右腿相位
-        
+    
         return super()._post_physics_step_callback()
     
     
@@ -83,7 +83,7 @@ class G1Robot(LeggedRobot):
                                     self.base_ang_vel  * self.obs_scales.ang_vel,
                                     self.projected_gravity,
                                     self.commands[:, :3] * self.commands_scale,
-                                    (self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos,
+                                    (self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos,  
                                     self.dof_vel * self.obs_scales.dof_vel,
                                     self.actions,
                                     sin_phase,
