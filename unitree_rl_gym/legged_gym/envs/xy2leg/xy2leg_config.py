@@ -25,7 +25,7 @@ class XY2LegCfg( LeggedRobotCfg ):
         num_privileged_obs = 50
         num_actions = 12
 
-    
+
     class domain_rand(LeggedRobotCfg.domain_rand):
         """ 域随机化：提高策略在真实世界的泛化能力 """
         randomize_friction = True
@@ -35,7 +35,7 @@ class XY2LegCfg( LeggedRobotCfg ):
         push_robots = True
         push_interval_s = 5
         max_push_vel_xy = 1.5
-      
+
 
     class control( LeggedRobotCfg.control ):
         # PD Drive parameters:
@@ -82,7 +82,11 @@ class XY2LegCfg( LeggedRobotCfg ):
         terminate_after_contacts_on = ["base_link"] # 接触地面给终止的杆件
         self_collisions = 0 # 1 to disable, 0 to enable...bitwise filter
         flip_visual_attachments = False
-  
+
+
+        # board_file = '{LEGGED_GYM_ROOT_DIR}/resources/robots/board/urdf/board.urdf'
+        # board_name = "sailboard"
+
     class rewards( LeggedRobotCfg.rewards ):
         soft_dof_pos_limit = 0.9
         base_height_target = 0.42 # 预估

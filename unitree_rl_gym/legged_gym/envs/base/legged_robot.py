@@ -651,6 +651,17 @@ class LeggedRobot(BaseTask):
         base_height = self.root_states[:, 2]
         return torch.square(base_height - self.cfg.rewards.base_height_target)
     
+    # def _reward_base_height(self):
+    #     # Penalize base height away from target
+    #     base_height = self.root_states[:, 2]
+    #     target_min, target_max = self.cfg.rewards.base_height_zone[0], self.cfg.rewards.base_height_zone[1]
+        
+    #     distance_to_min = torch.clamp(target_min - base_height, min=0)  # 低于0.4时的距离
+    #     distance_to_max = torch.clamp(base_height - target_max, min=0)  # 高于0.5时的距离
+    #     total_distance = distance_to_min + distance_to_max 
+        
+    #     return torch.square(total_distance)
+    
     def _reward_torques(self):
         # Penalize torques
         return torch.sum(torch.square(self.torques), dim=1)

@@ -118,9 +118,21 @@ class ActorCritic(nn.Module):
 
     def update_distribution(self, observations):
         mean = self.actor(observations)
+        # 检查
+        # if torch.isnan(mean).any():
+        #     print("NaN in mean!")
+        #     print("Obs sample:", observations)
+        #     print("Mean:", mean)
+        # if torch.isnan(self.std).any():
+        #     print("NaN in std!")
+        #     print("Std:", self.std)
+
         self.distribution = Normal(mean, mean*0. + self.std)
 
     def act(self, observations, **kwargs):
+        if torch.isnan(observations).any() or torch.isinf(observations).any():
+            print("Invalid observation detected!")
+
         self.update_distribution(observations)
         return self.distribution.sample()
     
